@@ -30,7 +30,7 @@ lines(power2$Sub_metering_2~power2$mergeddatesandtimeposix, col="red")
 
 lines(power2$Sub_metering_3~power2$mergeddatesandtimeposix, col="blue")
 
-legend("topright", col = c("black", "red", "blue"), lty = 1 , lwd = 2, legend = c("Sub_metering_1","Sub_metering_2", "Sub_metering_3"), cex = 0.6)
+legend("topright", col = c("black", "red", "blue"), lty = 1 , lwd = 2, legend = c("Sub_metering_1","Sub_metering_2", "Sub_metering_3"), cex = 0.7)
 
 dev.off()
 
