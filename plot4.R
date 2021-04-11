@@ -1,0 +1,53 @@
+#plot4
+
+install.packages("lubrydate")
+
+library(lubridate)
+
+dir.create("./plottingwithR")
+
+setwd("./plottingwithR")
+
+fileurl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+
+download.file(fileurl, destfile = "householdpowerc.zip", method = "curl")
+
+unzip("householdpowerc.zip")
+
+power <- read.csv("household_power_consumption.txt", sep = ";", na.strings = "?" )
+
+power$Date <- dmy(power$Date)
+
+power2 <- power[(power$Date >= "2007-02-01" & power$Date <= "2007-02-02"),]
+
+power2$mergeddatesandtimeposix <- as.POSIXct(strptime(paste(power2$Date,power2$Time, sep = " "), format = "%Y-%m-%d %H:%M:%S"))
+
+png(file = "plot4.png", width = 480, height = 480, units = "px")
+
+par(mfrow = c(2,2), mar = c(4,4,2,1), oma = c(0,0,2,0))
+
+
+with(power2, plot(power2$Global_active_power~power2$mergeddatesandtimeposix, type ="l", ylab = "Global Active Power", xlab = ""))
+
+
+
+plot(power2$Voltage~power2$mergeddatesandtimeposix, type = "l", ylab = "Voltage", xlab = "datetime")
+
+
+
+plot(power2$Sub_metering_1~power2$mergeddatesandtimeposix, type = "l", ylab = "Energy sub metering", xlab = "", col = "black")
+
+lines(power2$Sub_metering_2~power2$mergeddatesandtimeposix, col = "red")
+
+lines(power2$Sub_metering_3~power2$mergeddatesandtimeposix, col = "blue")
+
+legend("topright", col = c("black", "red", "blue"), lty = 1, lwd = 2, bty = "n", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), cex = 0.70)
+
+
+
+plot(power2$Global_reactive_power~power2$mergeddatesandtimeposix, type ="l", ylab = "Global_reactive_power", xlab= "datetime")
+
+dev.off()
+
+
+
