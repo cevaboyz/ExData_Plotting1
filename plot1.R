@@ -14,7 +14,7 @@ download.file(fileurl, destfile = "householdpowerc.zip", method = "curl")
 
 unzip("householdpowerc.zip")
 
-power <- read.csv("household_power_consumption.txt", sep = ";")
+power <- read.csv("household_power_consumption.txt", sep = ";", na.strings = "?" )
 
 power$Date <- dmy(power$Date)
 
@@ -22,7 +22,7 @@ power2 <- power[(power$Date >= "2007-02-01" & power$Date <= "2007-02-02"),]
 
 power2$Global_active_power = as.numeric(as.character(power2$Global_active_power))
 
-png("plot1.png", width = 480, height = 480)
+png("plot1.png", width = 480, height = 480, units = "px")
 
 hist(test3$Global_active_power, main = "Global Active Power", col = "#fb0007", xlab = "Global Active Power (kilowatts)", ylab = "Frequency")
 
