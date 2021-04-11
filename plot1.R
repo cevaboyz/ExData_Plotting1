@@ -24,7 +24,7 @@ power2$Global_active_power = as.numeric(as.character(power2$Global_active_power)
 
 png("plot1.png", width = 480, height = 480, units = "px")
 
-hist(test3$Global_active_power, main = "Global Active Power", col = "#fb0007", xlab = "Global Active Power (kilowatts)", ylab = "Frequency")
+hist(power2$Global_active_power, main = "Global Active Power", col = "#fb0007", xlab = "Global Active Power (kilowatts)", ylab = "Frequency")
 
 dev.off()
 
